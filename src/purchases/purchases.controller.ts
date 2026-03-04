@@ -3,7 +3,7 @@ import { PurchasesService } from './purchases.service';
 import { CurrentUserId } from '../common/decorators';
 import { CreatePurchaseDto } from './dto/create-purchase.dto';
 
-@Controller('purchases')
+@Controller()
 export class PurchasesController {
   constructor(private readonly purchaseService: PurchasesService) {}
 

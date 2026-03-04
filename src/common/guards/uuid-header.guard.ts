@@ -4,15 +4,16 @@ import {
   ExecutionContext,
   BadRequestException,
 } from '@nestjs/common';
+import { Request } from 'express';
 import { isUUID } from 'class-validator';
 
 @Injectable()
 export class UuidHeaderGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean {
-    const request = context.switchToHttp().getRequest();
-    const user_id_header = request.headers['x-user-id'];
+    const request = context.switchToHttp().getRequest<Request>();
+    const userId = request.headers['x-user-id'];
 
-    if (!user_id_header || !isUUID(user_id_header)) {
+    if (!userId || Array.isArray(userId) || !isUUID(userId)) {
       throw new BadRequestException('Invalid or missing x-user-id header');
     }
 

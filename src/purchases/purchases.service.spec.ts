@@ -4,7 +4,6 @@ import { PurchasesService } from './purchases.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { ItemsService } from '../items/items.service';
 
-// Prevent Jest from loading generated ESM prisma client/sql
 jest.mock('../../prisma/.generated/client', () => ({
   PrismaClient: jest.fn().mockImplementation(() => ({})),
   Type: { CREDIT: 'CREDIT', DEBIT: 'DEBIT' },
@@ -14,7 +13,7 @@ jest.mock('../../prisma/.generated/sql', () => ({
   getBalance: jest.fn((userId: string) => ({ userId })),
 }));
 
-describe('PurchasesService (unit)', () => {
+describe('PurchasesService', () => {
   let service: PurchasesService;
 
   const mockTx = {
@@ -23,10 +22,13 @@ describe('PurchasesService (unit)', () => {
     purchases: { create: jest.fn() },
   };
 
-  const mockPrisma = {
-    $transaction: jest.fn((fn) => fn(mockTx)),
-  };
+  type Tx = typeof mockTx;
 
+  const mockPrisma = {
+    $transaction: jest
+      .fn()
+      .mockImplementation((fn: (tx: Tx) => unknown) => fn(mockTx)),
+  };
   const mockItemsService = {
     findById: jest.fn(),
   };
