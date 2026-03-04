@@ -4,10 +4,11 @@ import { AppController } from './app.controller';
 import { ItemsModule } from './items/items.module';
 import { LedgerModule } from './ledger/ledger.module';
 import { PurchasesModule } from './purchases/purchases.module';
+import { PrismaModule } from './prisma/prisma.module';
 import { UuidHeaderGuard } from './common/guards/index';
 
 @Module({
-  imports: [ItemsModule, LedgerModule, PurchasesModule],
+  imports: [PrismaModule, ItemsModule, LedgerModule, PurchasesModule],
   controllers: [AppController],
   providers: [
     {
