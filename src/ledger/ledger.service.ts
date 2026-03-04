@@ -23,6 +23,6 @@ export class LedgerService {
   }
   async getBalance(userId: string): Promise<BalanceResponseDto> {
     const results = await this.prisma.$queryRawTyped(getBalance(userId));
-    return { balance: Number(results[0]?.balance ?? 0) };
+    return { balance: Number(results[0]?.balance ?? 0n) };
   }
 }
