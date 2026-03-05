@@ -25,6 +25,7 @@ jobs:
       - name: Prisma generate client
         env:
           DATABASE_URL: 'postgresql://dummy:dummy@localhost:5432/dummy'
+          DATABASE_SHADOW_URL: 'postgresql://dummy:dummy@localhost:5432/dummy_shadow'
         run: npm run prisma:generate
 
       - name: Build
