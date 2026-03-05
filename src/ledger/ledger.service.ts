@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { BalanceResponseDto } from './dto/balance-response.dto';
 import { CreateCreditDto } from './dto/create-credit.dto';
-import { Type } from '../../prisma/.generated/client';
-import { getBalance } from '../../prisma/.generated/sql';
+import { Type } from '@prisma/client';
+import { getBalance } from '@prisma/client/sql';
 
 @Injectable()
 export class LedgerService {

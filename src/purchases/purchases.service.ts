@@ -6,8 +6,8 @@ import {
 import { ItemsService } from '../items/items.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePurchaseDto } from './dto/create-purchase.dto';
-import { Type } from '../../prisma/.generated/enums';
-import { getBalance } from '../../prisma/.generated/sql';
+import { Type } from '@prisma/client';
+import { getBalance } from '@prisma/client/sql';
 
 @Injectable()
 export class PurchasesService {
