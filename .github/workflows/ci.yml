@@ -22,11 +22,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Prisma generate client
+      - name: Prisma generate client and sql
         env:
           DATABASE_URL: 'postgresql://dummy:dummy@localhost:5432/dummy'
           DATABASE_SHADOW_URL: 'postgresql://dummy:dummy@localhost:5432/dummy_shadow'
-        run: npm run prisma:generate
+        run: |
+          npm run prisma:generate
+          npm run prisma:generate:sql
 
       - name: Build
         run: npm run build
