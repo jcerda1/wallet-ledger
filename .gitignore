@@ -21,5 +21,11 @@ yarn-error.log*
 coverage/
 
 # Prisma local DB
-.prisma/dev.db
-.generated/
+prisma/dev.db
+prisma/.generated/
+.prisma/
+
+
+# docker artifacts
+docker-compose.override.yml
+*.tar
