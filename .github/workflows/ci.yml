@@ -51,6 +51,7 @@ jobs:
           DATABASE_SHADOW_URL: postgresql://postgres:postgres@localhost:5432/postgres
         run: |
           npm run prisma:generate
+          npx prisma migrate deploy
           npm run prisma:generate:sql
 
       - name: Build
