@@ -22,7 +22,6 @@ coverage/
 
 # Prisma local DB
 prisma/dev.db
-prisma/.generated/
 .prisma/
 
 

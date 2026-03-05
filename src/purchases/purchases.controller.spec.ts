@@ -2,11 +2,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { PurchasesController } from './purchases.controller';
 import { PurchasesService } from './purchases.service';
 
-jest.mock('../../prisma/.generated/client', () => ({
+jest.mock('@prisma/client', () => ({
   PrismaClient: jest.fn().mockImplementation(() => ({})),
   Type: { CREDIT: 'CREDIT', DEBIT: 'DEBIT' },
 }));
-jest.mock('../../prisma/.generated/sql', () => ({ getBalance: jest.fn() }));
+jest.mock('@prisma/client/sql', () => ({ getBalance: jest.fn() }));
 
 describe('PurchasesController', () => {
   let controller: PurchasesController;
