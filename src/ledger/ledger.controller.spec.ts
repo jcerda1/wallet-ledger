@@ -2,11 +2,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { LedgerController } from './ledger.controller';
 import { LedgerService } from './ledger.service';
 
-jest.mock('../../prisma/.generated/client', () => ({
+jest.mock('@prisma/client', () => ({
   PrismaClient: jest.fn().mockImplementation(() => ({})),
 }));
 
-jest.mock('../../prisma/.generated/sql', () => ({
+jest.mock('@prisma/client/sql', () => ({
   getBalance: jest.fn((userId: string) => ({ userId })),
 }));
 

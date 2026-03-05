@@ -4,12 +4,12 @@ import { PurchasesService } from './purchases.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { ItemsService } from '../items/items.service';
 
-jest.mock('../../prisma/.generated/client', () => ({
+jest.mock('@prisma/client', () => ({
   PrismaClient: jest.fn().mockImplementation(() => ({})),
   Type: { CREDIT: 'CREDIT', DEBIT: 'DEBIT' },
 }));
 
-jest.mock('../../prisma/.generated/sql', () => ({
+jest.mock('@prisma/client/sql', () => ({
   getBalance: jest.fn((userId: string) => ({ userId })),
 }));
 

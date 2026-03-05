@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { LedgerService } from './ledger.service';
 import { PrismaService } from '../prisma/prisma.service';
 
-jest.mock('../../prisma/.generated/client', () => ({
+jest.mock('@prisma/client', () => ({
   PrismaClient: jest.fn().mockImplementation(() => ({})),
   Type: {
     CREDIT: 'CREDIT',
@@ -10,7 +10,7 @@ jest.mock('../../prisma/.generated/client', () => ({
   },
 }));
 
-jest.mock('../../prisma/.generated/sql', () => ({
+jest.mock('@prisma/client/sql', () => ({
   getBalance: jest.fn((userId: string) => ({ userId })),
 }));
 
