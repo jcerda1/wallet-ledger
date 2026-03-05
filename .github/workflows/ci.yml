@@ -48,7 +48,6 @@ jobs:
       - name: Prisma generate client and sql
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
-          DATABASE_SHADOW_URL: postgresql://postgres:postgres@localhost:5432/postgres
         run: |
           npm run prisma:generate
           npx prisma migrate deploy
