@@ -7,7 +7,7 @@ name: Deploy (main)
 on:
   push:
     branches: [main]
-
+  workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -46,7 +46,7 @@ jobs:
         run: npm test
 
       - name: Install Railway CLI
-        run: npm i -g @railway/cli@3.16.0
+        run: npm i -g @railway/cli
 
       - name: Deploy to Railway
         env:
