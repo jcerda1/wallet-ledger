@@ -1,10 +1,20 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ItemsModule } from './items/items.module';
+import { LedgerModule } from './ledger/ledger.module';
+import { PurchasesModule } from './purchases/purchases.module';
+import { PrismaModule } from './prisma/prisma.module';
+import { UuidHeaderGuard } from './common/guards/index';
 
 @Module({
-  imports: [],
+  imports: [PrismaModule, ItemsModule, LedgerModule, PurchasesModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: UuidHeaderGuard,
+    },
+  ],
 })
 export class AppModule {}
