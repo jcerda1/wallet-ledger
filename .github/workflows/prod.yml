@@ -1,3 +1,7 @@
+concurrency:
+  group: deploy-${{ github.ref }}-production
+  cancel-in-progress: false
+
 name: Deploy (main)
 
 on:
@@ -8,8 +12,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: production
-    env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,15 +25,6 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      - name: Generate Prisma Client (JS)
-        run: npm run prisma:generate
-
-      - name: Run production migrations
-        run: npx prisma migrate deploy
-
-      - name: Generate typed SQL
-        run: npm run prisma:generate:sql
-
       - name: Build
         run: npm run build
 
@@ -41,8 +34,16 @@ jobs:
       - name: Test
         run: npm test
 
+      - name: Generate Prisma Client (JS) & Run production migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          npm run prisma:generate
+          npx prisma migrate deploy
+          npm run prisma:generate:sql
+
       - name: Install Railway CLI
-        run: npm i -g @railway/cli
+        run: npm i -g @railway/cli@3.16.0
 
       - name: Deploy to Railway
         env:
